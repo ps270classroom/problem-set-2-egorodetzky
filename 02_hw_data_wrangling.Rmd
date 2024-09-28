@@ -133,8 +133,9 @@ You do not need to exactly match the labels, but you should have informative lab
 ```{r}
 fb_top_plot <- fb_ads |>
   filter(office == "US House") |>
-  arrange(desc(impressions_millions))
-ggplot(data = fb_ads, mapping = aes(x = impressions_millions, y = cand_name_last)) + geom_col()
+  slice_max(impressions_millions, n = 15)
+ggplot(data = fb_ads, mapping = aes(x = impressions_millions, y = cand_name_last)) + geom_col() +
+  labs(title = "Top 15 House Candidate Facebook Ad Impressions, 2017-2018", x = "Facebook Ad Impressions in Millions", y = "Candidates", scale_fill_manual(values = c(R = "red", D = "blue")))
 fb_top_plot
 ```
 
