@@ -33,6 +33,7 @@ Political advertising has traditionally been focused on the medium of television
 
 ```{r}
 library(dplyr)
+library(ggplot2)
 ```
 
 \newpage
@@ -129,6 +130,13 @@ You do not need to exactly match the labels, but you should have informative lab
  **Rubric:** 3pts for correct axes (autograder); 3pts for correct data fed into `ggplot` (autograder); 3pts for the correct ordering of the y-axis (PDF); 3pts for fill being mapped to `party` (autograder); 1pt for plot being in knitted output and having informative labels (PDF)
 
 ## Answer 4
+```{r}
+fb_top_plot <- fb_ads |>
+  filter(office == "US House") |>
+  arrange(desc(impressions_millions))
+ggplot(data = fb_ads, mapping = aes(x = impressions_millions, y = cand_name_last)) + geom_col()
+fb_top_plot
+```
 
 
 
