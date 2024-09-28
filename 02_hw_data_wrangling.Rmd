@@ -108,7 +108,7 @@ plot_q3 <- ggplot(data = fb_ads, mapping = aes(x = impressions_millions)) +
   geom_histogram()
 plot_q3
 ```
-
+Most of the House cadidates did not have more than 10 million Facebook ad impressions.
 
 \newpage
 
