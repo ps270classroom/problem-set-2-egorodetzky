@@ -142,8 +142,8 @@ top_cand <- fb_ads |>
   slice_head(n = 15) |>
   mutate(cand_name_last = fct_reorder(cand_name_last, impressions_millions))
 
-fb_top_plot <- ggplot(data = top_cand, mapping = aes(x = impressions_millions, y = cand_name_last, fill = party)) + 
-  geom_bar(stat = "identity") +
+fb_top_plot <- ggplot(data = top_cand, mapping = aes(x = impressions_millions, y = cand_name_last)) + 
+  geom_bar(stat = "identity", aes(fill = party)) +
   labs(title = "Top 15 House Candidate Facebook Ad Impressions, 2017-2018", x = "Facebook Ad Impressions in Millions", y = "Candidates") +
   scale_fill_manual(values = c(R = "red", D = "blue"))
 fb_top_plot
