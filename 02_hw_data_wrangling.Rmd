@@ -33,6 +33,7 @@ Political advertising has traditionally been focused on the medium of television
 
 ```{r}
 library(tidyverse)
+library(knitr)
 ```
 
 \newpage
@@ -54,9 +55,9 @@ There are 7,014 candidates.
 
 ```{r}
 incumbency_table <- fb_ads |>
-  count(incumbency) |>
-knitr::kable()
+  count(incumbency)
 incumbency_table
+knitr::kable(incumbency_table)
 ```
 
 \newpage
@@ -78,11 +79,11 @@ In the writeup, describe which type of candidate sponsored the most promoting ad
 ## Answer 2
 ```{r}
 party_incumbent_promote <- fb_ads |>
-  group_by(party, incumbency) |>
   filter(office == "US House" | office == "US Senate") |>
-  summarize(promote_prop = mean(ad_tone_promote, na.rm = TRUE))
-knitr::kable(party_incumbent_promote, col.names = c("Party", "Incumbency", "Promote Prop"), digits = 3)
+  group_by(party, incumbency) |>
+  summarize(promote_prop = mean(ad_tone_promote, na.rm = TRUE), .groups = 'drop')
 party_incumbent_promote
+knitr::kable(party_incumbent_promote, col.names = c("Party", "Incumbency", "Promote Prop"), digits = 3)
 ```
 Democratic incumbent candidates sponsored the most promoting ads on average.
 
@@ -100,7 +101,7 @@ Create a histogram of this variable for just the US House races. Save the ggplot
 ## Answer 3
 ```{r}
 fb_ads <- fb_ads |>
-  mutate(impressions_millions = impressions * 1000000)
+  mutate(impressions_millions = impressions / 1000000)
 fb_ads
 
 plot_q3 <- ggplot(data = fb_ads, mapping = aes(x = impressions_millions)) +
