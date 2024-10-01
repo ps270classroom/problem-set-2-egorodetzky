@@ -135,7 +135,8 @@ You do not need to exactly match the labels, but you should have informative lab
 top_cand <- fb_ads |>
   filter(office == "US House") |>
   arrange(desc(impressions_millions)) |>
-  slice_head(n = 15)
+  slice_head(n = 15) |>
+  mutate(cand_name_last = fct_reorder(cand_name_last, impressions_millions))
 
 fb_top_plot <- ggplot(data = top_cand, mapping = aes(x = impressions_millions, y = cand_name_last, fill = party)) + 
   geom_bar(stat = "identity") +
