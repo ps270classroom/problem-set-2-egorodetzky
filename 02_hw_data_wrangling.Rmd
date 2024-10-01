@@ -103,12 +103,15 @@ Create a histogram of this variable for just the US House races. Save the ggplot
 fb_ads <- fb_ads |>
   mutate(impressions_millions = impressions / 1000000)
 fb_ads
-
-plot_q3 <- ggplot(data = fb_ads, mapping = aes(x = impressions_millions)) +
+```
+```{r}
+fb_ads |>
+  filter(office == "US House")
+plot_q3 <- ggplot(data = fb_ads, aes(x = impressions_millions)) +
   geom_histogram()
 plot_q3
 ```
-Most of the House cadidates did not have more than 10 million Facebook ad impressions.
+The shape of the histogram is one column over 6000 and the rest near 0. Most of the House candidates did not have more than 10 million Facebook ad impressions.
 
 \newpage
 
